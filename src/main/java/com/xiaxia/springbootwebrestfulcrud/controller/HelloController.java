@@ -18,7 +18,7 @@ public class HelloController{
 //    @ResponseBody
     @RequestMapping("/hello")
     public String Hello(){
-        return "dashboard";
+        return "emps/list";
     }
 
     @RequestMapping("/c")
