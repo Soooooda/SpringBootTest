@@ -15,10 +15,10 @@ public class HelloController{
 //        return "index";
 //    }
 
-    @ResponseBody
+//    @ResponseBody
     @RequestMapping("/hello")
     public String Hello(){
-        return "Hello";
+        return "dashboard";
     }
 
     @RequestMapping("/c")
