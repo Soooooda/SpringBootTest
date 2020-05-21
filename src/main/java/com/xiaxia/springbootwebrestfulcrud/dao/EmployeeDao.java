@@ -34,7 +34,7 @@ public class EmployeeDao {
             employee.setId(initId++);
         }
 
-//        employee.setDepartment(departmentDao.getDepartment(employee.getDepartment().getId()));
+        employee.setDepartment(departmentDao.getDepartment(employee.getDepartment().getId()));
         employees.put(employee.getId(),employee);
     }
 

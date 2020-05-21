@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Add Employee</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.css}"  rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/assets/css/dashboard.css}" rel="stylesheet">
+  </head>
+  <body>
+<!--模板名：会使用thymeleaf的前后端配置-->
+<div th:replace="commons/bar::topbar"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div th:replace="~{commons/bar::#sidebarMenu(activeUri='emps')}"></div>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<!--      需要区分是员工修改还是添加，如果是添加的话就不应该调用emp的值，因为为空-->
+      <form th:action="@{/emp}" method="post">
+<!--        发送put请求修改员工数据-->
+<!--        1. SpringMVC中配置hiddenhttpmethodfilter boot自动配置好了-->
+<!--        2. 页面创建一个post表单-->
+<!--        3. 创建一个input项，name="_method"，值是我们指定的请求方式-->
+
+        <input type="hidden" name="_method" value="put" th:if="${emp!=null}"/>
+        <input type="hidden" name="id" th:if="${emp!=null}" th:value="${emp.id}"/>
+        <div class="form-group">
+          <label>LastName</label>
+          <input name="lastName" class="form-control" type="text" placeholder="Zhangsan" th:value="${emp!=null}?${emp.lastName}">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Email address</label>
+          <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" th:value="${emp!=null}?${emp.email}">
+        </div>
+
+
+
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="1" th:checked="${emp!=null}?${emp.gender==1}">
+            <label class="form-check-label" for="exampleRadios1">
+              Male
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="0" th:checked="${emp!=null}?${emp.gender==0}">
+            <label class="form-check-label" for="exampleRadios2">
+              Female
+            </label>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label>Departments</label>
+          <select class="form-control" name="department.id">
+            <option th:selected="${emp!=null}?${dept.id==emp.department.id}" th:value="${dept.getId()}" th:each="dept:${depts}" th:text="${dept.getDepartmentName()}">1</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Birth</label>
+          <input name="birth" class="form-control" type="text" placeholder="Zhangsan" th:value="${emp!=null}?${#dates.format(emp.birth,'yyyy-MM-dd HH:mm')}">
+        </div>
+        <button class="btn btn-primary" type="submit" th:text="${emp!=null}?'Modify':'Add'">Add</button>
+      </form>
+
+
+    </main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script src="dashboard.js"  th:src="@{/assets/js/dashboard.js}" ></script></body>
+</html>

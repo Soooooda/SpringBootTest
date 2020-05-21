@@ -38,7 +38,7 @@ public class Employee {
         return lastName;
     }
 
-    public void setLastNmae(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -78,7 +78,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", lastNmae='" + lastName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
                 ", department=" + department +
