@@ -2,6 +2,9 @@ package com.xiaxia.springbootwebrestfulcrud.config;
 
 import com.xiaxia.springbootwebrestfulcrud.component.LoginHandlerInterceptor;
 import com.xiaxia.springbootwebrestfulcrud.component.MyLocaleResolver;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -13,6 +16,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //扩展spring mvc 功能
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
+
+
+
     @Override
     //浏览器发送try 请求来到cover页面
     public void addViewControllers(ViewControllerRegistry registry) {
